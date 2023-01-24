@@ -1,6 +1,6 @@
 package models
 
-import "github.com/jinzhu/gorm"
+import "gorm.io/gorm"
 
 type UserBasic struct {
 	gorm.Model
@@ -16,4 +16,8 @@ type UserBasic struct {
 	LogoutTime    uint64
 	IsLogout      bool
 	DeviceInfo    string
+}
+
+func (table *UserBasic) TableName() string {
+	return "user_basic"
 }
