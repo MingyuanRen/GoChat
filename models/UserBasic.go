@@ -1,23 +1,48 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"fmt"
+	"gochat/utils"
+	"gorm.io/gorm"
+)
 
 type UserBasic struct {
 	gorm.Model
 	Name          string
-	Password      string
-	Phone         string
-	Email         string
-	Identifier    string
-	ClientIP      string
+	PassWord      string
+	Phone         string `valid:"matches(^1[3-9]{1}\\d{9}$)"`
+	Email         string `valid:"email"`
+	Avatar        string
+	Identity      string
+	ClientIp      string
 	ClientPort    string
+	Salt          string
 	LoginTime     uint64
-	HeartBeatTime uint64
-	LogoutTime    uint64
+	HeartbeatTime uint64
+	LoginOutTime  uint64 `gorm:"column:login_out_time" json:"login_out_time"`
 	IsLogout      bool
 	DeviceInfo    string
 }
 
 func (table *UserBasic) TableName() string {
 	return "user_basic"
+}
+
+func CreateUser(user UserBasic) *gorm.DB {
+	return utils.DB.Create(&user)
+}
+
+func DeleteUser(user UserBasic) *gorm.DB {
+	return utils.DB.Delete(&user)
+}
+func UpdateUser(user UserBasic) *gorm.DB {
+	return utils.DB.Model(&user).Updates(UserBasic{Name: user.Name, PassWord: user.PassWord, Phone: user.Phone, Email: user.Email})
+}
+func GetUserList() []*UserBasic {
+	data := make([]*UserBasic, 10)
+	utils.DB.Find(&data)
+	for _, v := range data {
+		fmt.Println(v)
+	}
+	return data
 }
