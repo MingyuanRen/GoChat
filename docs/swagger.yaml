@@ -10,6 +10,29 @@ paths:
             type: string
       tags:
       - mainpage
+  /user/CreateUser:
+    get:
+      parameters:
+      - description: username
+        in: query
+        name: name
+        type: string
+      - description: password
+        in: query
+        name: password
+        type: string
+      - description: confirm password
+        in: query
+        name: repassword
+        type: string
+      responses:
+        "200":
+          description: code", "message"}
+          schema:
+            type: string
+      summary: create user
+      tags:
+      - userpage
   /user/GetUserList:
     get:
       responses:
@@ -17,6 +40,7 @@ paths:
           description: code", "message"}
           schema:
             type: string
+      summary: list all users
       tags:
       - mainpage
 swagger: "2.0"

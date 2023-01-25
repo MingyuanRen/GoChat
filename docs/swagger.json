@@ -19,11 +19,48 @@
                 }
             }
         },
+        "/user/CreateUser": {
+            "get": {
+                "tags": [
+                    "userpage"
+                ],
+                "summary": "create user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "username",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "password",
+                        "name": "password",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "confirm password",
+                        "name": "repassword",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "code\", \"message\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user/GetUserList": {
             "get": {
                 "tags": [
                     "mainpage"
                 ],
+                "summary": "list all users",
                 "responses": {
                     "200": {
                         "description": "code\", \"message\"}",

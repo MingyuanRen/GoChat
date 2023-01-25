@@ -12,7 +12,7 @@ type UserBasic struct {
 	PassWord      string
 	Phone         string `valid:"matches(^1[3-9]{1}\\d{9}$)"`
 	Email         string `valid:"email"`
-	Avatar        string //头像
+	Avatar        string
 	Identity      string
 	ClientIp      string
 	ClientPort    string
@@ -26,6 +26,10 @@ type UserBasic struct {
 
 func (table *UserBasic) TableName() string {
 	return "user_basic"
+}
+
+func CreateUser(user UserBasic) *gorm.DB {
+	return utils.DB.Create(&user)
 }
 
 func GetUserList() []*UserBasic {
