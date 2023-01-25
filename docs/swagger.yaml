@@ -58,4 +58,27 @@ paths:
       summary: list all users
       tags:
       - mainpage
+  /user/UpdateUser:
+    post:
+      parameters:
+      - description: id
+        in: formData
+        name: id
+        type: string
+      - description: name
+        in: formData
+        name: name
+        type: string
+      - description: password
+        in: formData
+        name: password
+        type: string
+      responses:
+        "200":
+          description: code", "message"}
+          schema:
+            type: string
+      summary: update user
+      tags:
+      - userpage
 swagger: "2.0"
