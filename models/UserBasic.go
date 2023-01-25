@@ -32,6 +32,9 @@ func CreateUser(user UserBasic) *gorm.DB {
 	return utils.DB.Create(&user)
 }
 
+func DeleteUser(user UserBasic) *gorm.DB {
+	return utils.DB.Delete(&user)
+}
 func GetUserList() []*UserBasic {
 	data := make([]*UserBasic, 10)
 	utils.DB.Find(&data)

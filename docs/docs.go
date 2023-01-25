@@ -67,6 +67,30 @@ const docTemplate = `{
                 }
             }
         },
+        "/user/DeleteUser": {
+            "get": {
+                "tags": [
+                    "userpage"
+                ],
+                "summary": "delete user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "code\", \"message\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user/GetUserList": {
             "get": {
                 "tags": [

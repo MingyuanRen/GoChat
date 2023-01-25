@@ -2,6 +2,7 @@ package service
 
 import (
 	"gochat/models"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -41,5 +42,21 @@ func CreateUser(c *gin.Context) {
 	models.CreateUser(user)
 	c.JSON(200, gin.H{
 		"message": "New User Created!",
+	})
+}
+
+// DeleteUser
+// @Summary delete user
+// @Tags userpage
+// @param id query string false "id"
+// @Success 200 {string} json{"code", "message"}
+// @Router /user/DeleteUser [get]
+func DeleteUser(c *gin.Context) {
+	user := models.UserBasic{}
+	id, _ := strconv.Atoi(c.Query("id"))
+	user.ID = uint(id)
+	models.DeleteUser(user)
+	c.JSON(200, gin.H{
+		"message": "Delete User!",
 	})
 }
