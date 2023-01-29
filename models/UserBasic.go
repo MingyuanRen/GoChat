@@ -11,7 +11,7 @@ type UserBasic struct {
 	gorm.Model
 	Name          string
 	PassWord      string
-	Phone         string `valid:"matches(^1[3-9]{1}\\d{9}$)"`
+	Phone         string
 	Email         string `valid:"email"`
 	Avatar        string
 	Identity      string
@@ -29,19 +29,22 @@ func (table *UserBasic) TableName() string {
 	return "user_basic"
 }
 
-func FindUserByName(name string) *gorm.DB {
+func FindUserByName(name string) UserBasic {
 	user := UserBasic{}
-	return utils.DB.Where("name = ", name).First(&user)
+	utils.DB.Where("name = ? ", name).First(&user)
+	return user
 }
 
-func FindUserByPhone(phone string) *gorm.DB {
+func FindUserByPhone(phone string) UserBasic {
 	user := UserBasic{}
-	return utils.DB.Where("phone = ", phone).First(&user)
+	utils.DB.Where("phone = ? ", phone).First(&user)
+	return user
 }
 
-func FindUserByEmail(email string) *gorm.DB {
+func FindUserByEmail(email string) UserBasic {
 	user := UserBasic{}
-	return utils.DB.Where("email = ", email).First(&user)
+	utils.DB.Where("email = ? ", email).First(&user)
+	return user
 }
 
 func CreateUser(user UserBasic) *gorm.DB {
