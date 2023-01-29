@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"gochat/utils"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -32,6 +33,15 @@ func (table *UserBasic) TableName() string {
 func FindUserByName(name string) UserBasic {
 	user := UserBasic{}
 	utils.DB.Where("name = ? ", name).First(&user)
+	return user
+}
+func FindUserByNameAndPwd(name string, password string) UserBasic {
+	user := UserBasic{}
+	utils.DB.Where("name = ? and pass_word=?", name, password).First(&user)
+	//token
+	str := fmt.Sprintf("%d", time.Now().Unix())
+	temp := utils.MD5Encode(str)
+	utils.DB.Model(&user).Where("id = ?", user.ID).Update("identity", temp)
 	return user
 }
 

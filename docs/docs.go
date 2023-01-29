@@ -90,10 +90,40 @@ const docTemplate = `{
                 }
             }
         },
+        "/user/FindUserByNameAndPwd": {
+            "post": {
+                "tags": [
+                    "userpage"
+                ],
+                "summary": "login",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "pasword",
+                        "name": "password",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "code\",\"message\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user/GetUserList": {
             "get": {
                 "tags": [
-                    "mainpage"
+                    "userpage"
                 ],
                 "summary": "list all users",
                 "responses": {

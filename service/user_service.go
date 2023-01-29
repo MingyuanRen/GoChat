@@ -13,7 +13,7 @@ import (
 
 // GetUserList
 // @Summary list all users
-// @Tags mainpage
+// @Tags userpage
 // @Success 200 {string} json{"code", "message"}
 // @Router /user/GetUserList [get]
 func GetUserList(c *gin.Context) {
@@ -56,10 +56,10 @@ func CreateUser(c *gin.Context) {
 
 	// user.PassWord = password
 	user.PassWord = utils.MakePassword(password, salt)
-
+	user.Salt = salt
 	models.CreateUser(user)
 	c.JSON(200, gin.H{
-		"message": "New User Created!",
+		"message": "New User has been Created!",
 	})
 }
 
@@ -113,4 +113,38 @@ func UpdateUser(c *gin.Context) {
 		})
 	}
 
+}
+
+// FindUserByNameAndPwd
+// @Summary login
+// @Tags userpage
+// @param name query string false "name"
+// @param password query string false "pasword"
+// @Success 200 {string} json{"code","message"}
+// @Router /user/FindUserByNameAndPwd [post]
+func FindUserByNameAndPwd(c *gin.Context) {
+	data := models.UserBasic{}
+
+	name := c.Query("name")
+	password := c.Query("password")
+	user := models.FindUserByName(name)
+
+	if user.Name == "" {
+		c.JSON(200, gin.H{
+			"message": "This user doesn't exist!",
+		})
+		return
+	}
+	flag := utils.ValidPassword(password, user.Salt, user.PassWord)
+	if !flag {
+		c.JSON(200, gin.H{
+			"message": "Wrong Password",
+		})
+		return
+	}
+	pwd := utils.MakePassword(password, user.Salt)
+	data = models.FindUserByNameAndPwd(name, pwd)
+	c.JSON(200, gin.H{
+		"message": data,
+	})
 }
