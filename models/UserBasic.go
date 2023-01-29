@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"gochat/utils"
+
 	"gorm.io/gorm"
 )
 
@@ -10,7 +11,7 @@ type UserBasic struct {
 	gorm.Model
 	Name          string
 	PassWord      string
-	Phone         string `valid:"matches(^1[3-9]{1}\\d{9}$)"`
+	Phone         string
 	Email         string `valid:"email"`
 	Avatar        string
 	Identity      string
@@ -26,6 +27,24 @@ type UserBasic struct {
 
 func (table *UserBasic) TableName() string {
 	return "user_basic"
+}
+
+func FindUserByName(name string) UserBasic {
+	user := UserBasic{}
+	utils.DB.Where("name = ? ", name).First(&user)
+	return user
+}
+
+func FindUserByPhone(phone string) UserBasic {
+	user := UserBasic{}
+	utils.DB.Where("phone = ? ", phone).First(&user)
+	return user
+}
+
+func FindUserByEmail(email string) UserBasic {
+	user := UserBasic{}
+	utils.DB.Where("email = ? ", email).First(&user)
+	return user
 }
 
 func CreateUser(user UserBasic) *gorm.DB {
