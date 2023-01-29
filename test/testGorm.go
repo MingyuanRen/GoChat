@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"gochat/models"
 
 	"gorm.io/driver/mysql"
@@ -15,16 +14,16 @@ func main() {
 	}
 
 	// schema
-	db.AutoMigrate(&models.UserBasic{})
+	db.AutoMigrate(&models.Message{})
 
-	// Create
-	user := &models.UserBasic{}
-	user.Name = "Mingyuan"
-	db.Create(user)
+	// // Create
+	// user := &models.UserBasic{}
+	// user.Name = "Mingyuan"
+	// db.Create(user)
 
-	// Read
-	fmt.Println(db.First(user, 1))
+	// // Read
+	// fmt.Println(db.First(user, 1))
 
-	// Update
-	db.Model(user).Update("PassWord", "1234")
+	// // Update
+	// db.Model(user).Update("PassWord", "1234")
 }
