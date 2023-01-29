@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"gochat/utils"
+
 	"gorm.io/gorm"
 )
 
@@ -26,6 +27,21 @@ type UserBasic struct {
 
 func (table *UserBasic) TableName() string {
 	return "user_basic"
+}
+
+func FindUserByName(name string) *gorm.DB {
+	user := UserBasic{}
+	return utils.DB.Where("name = ", name).First(&user)
+}
+
+func FindUserByPhone(phone string) *gorm.DB {
+	user := UserBasic{}
+	return utils.DB.Where("phone = ", phone).First(&user)
+}
+
+func FindUserByEmail(email string) *gorm.DB {
+	user := UserBasic{}
+	return utils.DB.Where("email = ", email).First(&user)
 }
 
 func CreateUser(user UserBasic) *gorm.DB {
