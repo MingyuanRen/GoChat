@@ -14,8 +14,8 @@ func main() {
 	}
 
 	// schema
-	db.AutoMigrate(&models.Message{})
-
+	db.AutoMigrate(&models.Contact{})
+	db.AutoMigrate(&models.GroupBasic{})
 	// // Create
 	// user := &models.UserBasic{}
 	// user.Name = "Mingyuan"
