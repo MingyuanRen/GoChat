@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--js include-->
+    {{template "/chat/head.shtml"}}
+</head>
+<body>
+
+<header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">Login</h1>
+</header>
+{{.}}
+<div class="mui-content login-page" id="pageapp">
+    <form id='login-form' class="mui-input-group login-from">
+        <div class="mui-input-row">
+            <input v-model="user.name" placeholder="Please Input User Name" type="text" class="mui-input-clear mui-input" >
+        </div>
+        <div class="mui-input-row">
+            <input v-model="user.password" placeholder="Please Input PassWord"  type="password" class="mui-input-clear mui-input" >
+        </div>
+    </form>
+    <div class="mui-content-padded">
+        <button @click="login"  type="button"  class="mui-btn mui-btn-block mui-btn-primary btn-login">Login</button>
+        <div class="link-area"><a id='reg' href="/toRegister">Register Account</a> <span class="spliter">|</span> <a  id='Forget Password'>Forget PassWord</a>
+        </div>
+    </div>
+    <div class="mui-content-padded oauth-area">
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var app = new Vue({
+        el:"#pageapp",
+        data:function(){
+          return {
+              user:{
+                name:"",
+                password:"",
+              }
+          }
+        },
+        methods:{
+            login:function(){
+                // Phone number Check
+                console.log("login")
+                util.post("user/FindUserByNameAndPwd",this.user).then(res=>{
+                    console.log(res)
+                    if(res.code!=0){
+                        mui.toast(res.message)
+                    }else{         
+                        var url = "/toChat?userId="+res.data.ID+"&token="+res.data.Identity
+                        userInfo(res.data)
+                        userId(res.data.ID)
+                        mui.toast("Successfully Login, Redirecting.....")
+                        location.href = url
+                    }
+                })
+            },
+        }
+    })
+</script>

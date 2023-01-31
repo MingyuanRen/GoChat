@@ -38,17 +38,18 @@ func GetUserList(c *gin.Context) {
 // @Success 200 {string} json{"code", "message"}
 // @Router /user/CreateUser [get]
 func CreateUser(c *gin.Context) {
+
+	user := models.UserBasic{}
 	// user.Name = c.Query("name")
 	// password := c.Query("password")
 	// repassword := c.Query("repassword")
-	user := models.UserBasic{}
 	user.Name = c.Request.FormValue("name")
 	password := c.Request.FormValue("password")
 	repassword := c.Request.FormValue("Identity")
-	fmt.Println(user.Name, "  >>>>>>>>>>>  ", password, repassword)
+	fmt.Println(user.Name, "  >>>>>>>>>>>  ", password, "wdadwadaw", repassword)
 	salt := fmt.Sprintf("%06d", rand.Int31())
 	data := models.FindUserByName(user.Name)
-	if user.Name == "" || password == "" || repassword == "" {
+	if user.Name == "" {
 		c.JSON(200, gin.H{
 			"code":    -1,
 			"message": "User name or password can not be empty!",
@@ -153,6 +154,7 @@ func UpdateUser(c *gin.Context) {
 // @Router /user/FindUserByNameAndPwd [post]
 func FindUserByNameAndPwd(c *gin.Context) {
 	data := models.UserBasic{}
+
 	//name := c.Query("name")
 	//password := c.Query("password")
 	name := c.Request.FormValue("name")
@@ -161,25 +163,27 @@ func FindUserByNameAndPwd(c *gin.Context) {
 	user := models.FindUserByName(name)
 	if user.Name == "" {
 		c.JSON(200, gin.H{
-			"code":    -1,
-			"message": "This User Doesn't Exist!",
+			"code":    -1, //  0 success    -1 fail
+			"message": "This User Does Not Exist",
 			"data":    data,
 		})
 		return
 	}
+
 	flag := utils.ValidPassword(password, user.Salt, user.PassWord)
 	if !flag {
 		c.JSON(200, gin.H{
-			"code":    -1,
-			"message": "Wrong Password",
+			"code":    -1, //  0 success    -1 fail
+			"message": "Wrong PassWord",
 			"data":    data,
 		})
 		return
 	}
 	pwd := utils.MakePassword(password, user.Salt)
 	data = models.FindUserByNameAndPwd(name, pwd)
+
 	c.JSON(200, gin.H{
-		"code":    0,
+		"code":    0, //  0 success    -1 fail
 		"message": "Login Successfully",
 		"data":    data,
 	})
