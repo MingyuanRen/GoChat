@@ -32,7 +32,7 @@ func (table *UserBasic) TableName() string {
 
 func FindUserByName(name string) UserBasic {
 	user := UserBasic{}
-	utils.DB.Where("name = ? ", name).First(&user)
+	utils.DB.Where("name = ?", name).First(&user)
 	return user
 }
 func FindUserByNameAndPwd(name string, password string) UserBasic {
