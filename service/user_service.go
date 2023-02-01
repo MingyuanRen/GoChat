@@ -18,7 +18,7 @@ import (
 // @Summary list all users
 // @Tags userpage
 // @Success 200 {string} json{"code", "message"}
-// @Router /user/GetUserList [get]
+// @Router /user/getUserList [post]
 func GetUserList(c *gin.Context) {
 	data := make([]*models.UserBasic, 10)
 	data = models.GetUserList()
@@ -36,8 +36,9 @@ func GetUserList(c *gin.Context) {
 // @param password query string false "password"
 // @param repassword query string false "confirm password"
 // @Success 200 {string} json{"code", "message"}
-// @Router /user/CreateUser [get]
+// @Router /user/createUser [post]
 func CreateUser(c *gin.Context) {
+	fmt.Println("call create user")
 
 	user := models.UserBasic{}
 	// user.Name = c.Query("name")
@@ -52,7 +53,7 @@ func CreateUser(c *gin.Context) {
 	if user.Name == "" {
 		c.JSON(200, gin.H{
 			"code":    -1,
-			"message": "User name or password can not be empty!",
+			"message": "User name can not be empty!",
 			"data":    user,
 		})
 		return
@@ -93,7 +94,7 @@ func CreateUser(c *gin.Context) {
 // @Tags userpage
 // @param id query string false "id"
 // @Success 200 {string} json{"code", "message"}
-// @Router /user/DeleteUser [get]
+// @Router /user/deleteUser [post]
 func DeleteUser(c *gin.Context) {
 	user := models.UserBasic{}
 	id, _ := strconv.Atoi(c.Query("id"))
@@ -115,7 +116,7 @@ func DeleteUser(c *gin.Context) {
 // @param phone formData string false "phone"
 // @param email formData string false "email"
 // @Success 200 {string} json{"code", "message"}
-// @Router /user/UpdateUser [post]
+// @Router /user/updateUser [post]
 func UpdateUser(c *gin.Context) {
 	// fmt.Println("call!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	user := models.UserBasic{}
@@ -151,7 +152,7 @@ func UpdateUser(c *gin.Context) {
 // @param name query string false "name"
 // @param password query string false "pasword"
 // @Success 200 {string} json{"code","message"}
-// @Router /user/FindUserByNameAndPwd [post]
+// @Router /user/findUserByNameAndPwd [post]
 func FindUserByNameAndPwd(c *gin.Context) {
 	data := models.UserBasic{}
 
