@@ -17,6 +17,7 @@ func Router() *gin.Engine {
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	r.GET("/index", service.GetIndex)
+	r.GET("/toRegister", service.ToRegister)
 	// static
 	r.Static("/asset", "asset/")
 	r.StaticFile("/favicon.ico", "asset/images/favicon.ico")
@@ -26,11 +27,11 @@ func Router() *gin.Engine {
 	r.GET("/", service.GetIndex)
 
 	// user module
-	r.GET("/user/GetUserList", service.GetUserList)
-	r.GET("/user/CreateUser", service.CreateUser)
-	r.GET("/user/DeleteUser", service.DeleteUser)
-	r.POST("/user/UpdateUser", service.UpdateUser)
-	r.POST("/user/FindUserByNameAndPwd", service.FindUserByNameAndPwd)
+	r.POST("/user/getUserList", service.GetUserList)
+	r.POST("/user/createUser", service.CreateUser)
+	r.POST("/user/deleteUser", service.DeleteUser)
+	r.POST("/user/updateUser", service.UpdateUser)
+	r.POST("/user/findUserByNameAndPwd", service.FindUserByNameAndPwd)
 
 	// send message
 	r.GET("/user/sendMsg", service.SendMsg)

@@ -20,3 +20,14 @@ func GetIndex(c *gin.Context) {
 	// 	"message": "welcome to GoChat!",
 	// })
 }
+
+func ToRegister(c *gin.Context) {
+	ind, err := template.ParseFiles("views/user/register.html")
+	if err != nil {
+		panic(err)
+	}
+	ind.Execute(c.Writer, "register")
+	// c.JSON(200, gin.H{
+	// 	"message": "welcome !!  ",
+	// })
+}

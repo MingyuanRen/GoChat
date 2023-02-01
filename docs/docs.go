@@ -30,8 +30,8 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/CreateUser": {
-            "get": {
+        "/user/createUser": {
+            "post": {
                 "tags": [
                     "userpage"
                 ],
@@ -66,8 +66,8 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/DeleteUser": {
-            "get": {
+        "/user/deleteUser": {
+            "post": {
                 "tags": [
                     "userpage"
                 ],
@@ -90,7 +90,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/FindUserByNameAndPwd": {
+        "/user/findUserByNameAndPwd": {
             "post": {
                 "tags": [
                     "userpage"
@@ -120,8 +120,8 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/GetUserList": {
-            "get": {
+        "/user/getUserList": {
+            "post": {
                 "tags": [
                     "userpage"
                 ],
@@ -136,7 +136,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/UpdateUser": {
+        "/user/updateUser": {
             "post": {
                 "tags": [
                     "userpage"

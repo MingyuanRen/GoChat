@@ -19,8 +19,8 @@
                 }
             }
         },
-        "/user/CreateUser": {
-            "get": {
+        "/user/createUser": {
+            "post": {
                 "tags": [
                     "userpage"
                 ],
@@ -55,8 +55,8 @@
                 }
             }
         },
-        "/user/DeleteUser": {
-            "get": {
+        "/user/deleteUser": {
+            "post": {
                 "tags": [
                     "userpage"
                 ],
@@ -79,7 +79,7 @@
                 }
             }
         },
-        "/user/FindUserByNameAndPwd": {
+        "/user/findUserByNameAndPwd": {
             "post": {
                 "tags": [
                     "userpage"
@@ -109,8 +109,8 @@
                 }
             }
         },
-        "/user/GetUserList": {
-            "get": {
+        "/user/getUserList": {
+            "post": {
                 "tags": [
                     "userpage"
                 ],
@@ -125,7 +125,7 @@
                 }
             }
         },
-        "/user/UpdateUser": {
+        "/user/updateUser": {
             "post": {
                 "tags": [
                     "userpage"
