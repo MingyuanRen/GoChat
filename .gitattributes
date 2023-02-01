@@ -1,4 +1,7 @@
 *.css linguist-detectable=false
 *.html linguist-detectable=false
 *.js linguist-detectable=false
-*.php linguist-detectable=false
+*.yml linguist-detectable=false
+*.yaml linguist-detectable=false
+*.mod linguist-detectable=false
+*.sum linguist-detectable=false
