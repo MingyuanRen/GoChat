@@ -97,7 +97,7 @@ func Chat(writer http.ResponseWriter, request *http.Request) {
 	// SetUserOnlineInfo("online_"+Id, []byte(node.Addr), time.Duration(viper.GetInt("timeout.RedisOnlineTime"))*time.Hour)
 
 	// final
-	sendMsg(userId, []byte("Welcome to GoChat"))
+	sendMsg(userId, []byte("Welcome to GoChat!!!!!"))
 }
 
 func sendProc(node *Node) {

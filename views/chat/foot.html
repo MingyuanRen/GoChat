@@ -53,7 +53,7 @@
                     "name": "",
                     "memo": "",
                 },
-                //用户信息
+                // User Info
                 info: {
                     "id": "",
                     "icon": "",
@@ -375,7 +375,7 @@
                         this.setTimeFlag()
                         //console.log(user)
                         this.win = "single";
-                        this.title = "Chating With" + user.Name;
+                        this.title = "Chating With " + user.Name;
                         this.otherAvatar = user.Avatar;
                         this.msgcontext.TargetId = parseInt(user.ID);
                         this.msgcontext.Type = 1;
@@ -411,7 +411,7 @@
                         })
                     }
                 },
-                //群聊的初始化
+                // init group chat
                 groupmsg: function (group) {
                     if (this.isDisable) {
                         this.setTimeFlag()
@@ -440,15 +440,15 @@
                         this.showmsg(user, data)
                         this.friends.map((item) => {
                             if (item.ID == data.userId) {
-                                // 1文字 2表情包 3图片 4音频
+                                // 1text 2meme 3pic 4audio
                                 if (data.Media === 1) {
                                     item.memo = data.Content
                                 } else if (data.Media === 2) {
                                     item.memo = data.Url
                                 } else if (data.Media === 3) {
-                                    item.memo = "[语音]"
+                                    item.memo = "[Audio]"
                                 } else if (data.Media === 4) {
-                                    item.memo = "[图片]"
+                                    item.memo = "[Pics]"
                                 }
                             }
                         })
@@ -457,9 +457,9 @@
 
                 },
                 initwebsocket: function () {
-                    var url = "ws://" + location.host + "/chat?userId=" + userId() + "&token=" + util.parseQuery("token");
+                    var url = "ws://" + location.host + "/user/sendUserMsg?id=" + userId() + "&token=" + util.parseQuery("token");
                     this.webSocket = new WebSocket(url);
-                    //消息处理
+                    // message
                     this.webSocket.onmessage = function (evt) {
                         console.log("onmessage", evt.data)
                         if (evt.data.indexOf("}") > -1) {
@@ -469,11 +469,11 @@
                             console.log("recv<==" + evt.data)
                         }
                     }.bind(this)
-                    //关闭回调
+                    // close rollback
                     this.webSocket.onclose = function (evt) {
-                        console.log("您已自动下线") //code 1006
+                        console.log("You are offline") //code 1006
                     }
-                    //出错回调
+                    // error rollback
                     this.webSocket.onerror = function (evt) {
                         console.log(evt.data)
                     }
