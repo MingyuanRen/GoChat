@@ -45,7 +45,7 @@
             login:function(){
                 // Phone number Check
                 console.log("login")
-                util.post("user/FindUserByNameAndPwd",this.user).then(res=>{
+                util.post("user/findUserByNameAndPwd",this.user).then(res=>{
                     console.log(res)
                     if(res.code!=0){
                         mui.toast(res.message)
