@@ -15,11 +15,11 @@ func main() {
 	} else {
 		fmt.Println("Workkkkkkkkk")
 	}
-
-	db.AutoMigrate(&models.UserBasic{})
-	user := &models.UserBasic{}
-	user.Name = "Mingyuan"
-	db.Create(user)
-	fmt.Println(db.First(user, 1))
-	db.Model(user).Update("PassWord", "1234")
+	fmt.Println("??????")
+	db.AutoMigrate(&models.Community{})
+	// user := &models.UserBasic{}
+	// user.Name = "Mingyuan"
+	// db.Create(user)
+	// fmt.Println(db.First(user, 1))
+	// db.Model(user).Update("PassWord", "1234")
 }
