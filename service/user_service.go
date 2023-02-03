@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gochat/models"
 	"gochat/utils"
+	"log"
 	"math/rand"
 	"net/http"
 	"strconv"
@@ -15,61 +16,61 @@ import (
 )
 
 // GetUserList
-// @Summary list all users
-// @Tags userpage
-// @Success 200 {string} json{"code", "message"}
-// @Router /user/getUserList [post]
+// @Summary all users
+// @Tags user module
+// @Success 200 {string} json{"code","message"}
+// @Router /user/getUserList [get]
 func GetUserList(c *gin.Context) {
 	data := make([]*models.UserBasic, 10)
 	data = models.GetUserList()
 	c.JSON(200, gin.H{
-		"code":    0, //  0 success -1 fail
-		"message": "User List",
+		"code":    0, //  0 success   --1 fail
+		"message": "This User Name has been registered",
 		"data":    data,
 	})
 }
 
 // CreateUser
 // @Summary create user
-// @Tags userpage
+// @Tags user model
 // @param name query string false "username"
 // @param password query string false "password"
-// @param repassword query string false "confirm password"
-// @Success 200 {string} json{"code", "message"}
-// @Router /user/createUser [post]
+// @param repassword query string false "repassword"
+// @Success 200 {string} json{"code","message"}
+// @Router /user/createUser [get]
 func CreateUser(c *gin.Context) {
-	fmt.Println("call create user")
 
-	user := models.UserBasic{}
 	// user.Name = c.Query("name")
 	// password := c.Query("password")
 	// repassword := c.Query("repassword")
+	user := models.UserBasic{}
 	user.Name = c.Request.FormValue("name")
 	password := c.Request.FormValue("password")
 	repassword := c.Request.FormValue("Identity")
-	fmt.Println(user.Name, "  >>>>>>>>>>>  ", password, "wdadwadaw", repassword)
+	fmt.Println(user.Name, "  >>>>>>>>>>>  ", password, repassword)
 	salt := fmt.Sprintf("%06d", rand.Int31())
+
 	data := models.FindUserByName(user.Name)
-	if user.Name == "" {
+	if user.Name == "" || password == "" || repassword == "" {
 		c.JSON(200, gin.H{
-			"code":    -1,
-			"message": "User name can not be empty!",
+			"code":    -1, //  0 success -1 fail
+			"message": "User Name or Password can not be empty!",
 			"data":    user,
 		})
 		return
 	}
 	if data.Name != "" {
 		c.JSON(200, gin.H{
-			"code":    -1,
-			"message": "This user name has been registered",
+			"code":    -1, //  0 success -1 fail
+			"message": "This User Name has been registered",
 			"data":    user,
 		})
 		return
 	}
 	if password != repassword {
 		c.JSON(200, gin.H{
-			"code":    -1,
-			"message": "The two passwords are inconsistent!",
+			"code":    -1, // 0 success -1 fail
+			"message": "This two password are not consistent",
 			"data":    user,
 		})
 		return
@@ -83,74 +84,17 @@ func CreateUser(c *gin.Context) {
 	user.HeartbeatTime = time.Now()
 	models.CreateUser(user)
 	c.JSON(200, gin.H{
-		"code":    0,
-		"message": "New User has been created, welcome to GoChat!",
+		"code":    0, //  0 success -1 fail
+		"message": "New User Created!",
 		"data":    user,
 	})
 }
 
-// DeleteUser
-// @Summary delete user
-// @Tags userpage
-// @param id query string false "id"
-// @Success 200 {string} json{"code", "message"}
-// @Router /user/deleteUser [post]
-func DeleteUser(c *gin.Context) {
-	user := models.UserBasic{}
-	id, _ := strconv.Atoi(c.Query("id"))
-	user.ID = uint(id)
-	models.DeleteUser(user)
-	c.JSON(200, gin.H{
-		"code":    0,
-		"message": "Delete User Successfully!",
-		"data":    user,
-	})
-}
-
-// UpdateUser
-// @Summary update user
-// @Tags userpage
-// @param id formData string false "id"
-// @param name formData string false "name"
-// @param password formData string false "password"
-// @param phone formData string false "phone"
-// @param email formData string false "email"
-// @Success 200 {string} json{"code", "message"}
-// @Router /user/updateUser [post]
-func UpdateUser(c *gin.Context) {
-	// fmt.Println("call!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	user := models.UserBasic{}
-	id, _ := strconv.Atoi(c.PostForm("id"))
-	user.ID = uint(id)
-	user.Name = c.PostForm("name")
-	user.PassWord = c.PostForm("password")
-	user.Phone = c.PostForm("phone")
-	user.Avatar = c.PostForm("icon")
-	user.Email = c.PostForm("email")
-	fmt.Println("update :", user)
-	_, err := govalidator.ValidateStruct(user)
-	if err != nil {
-		fmt.Println(err)
-		c.JSON(200, gin.H{
-			"code":    -1,
-			"message": "Modify parameters do not match!",
-			"data":    user,
-		})
-	} else {
-		models.UpdateUser(user)
-		c.JSON(200, gin.H{
-			"code":    0,
-			"message": "Update User Info Sucessfully",
-			"data":    user,
-		})
-	}
-}
-
-// FindUserByNameAndPwd
-// @Summary login
-// @Tags userpage
-// @param name query string false "name"
-// @param password query string false "pasword"
+// GetUserList
+// @Summary all user
+// @Tags user module
+// @param name query string false "username"
+// @param password query string false "password"
 // @Success 200 {string} json{"code","message"}
 // @Router /user/findUserByNameAndPwd [post]
 func FindUserByNameAndPwd(c *gin.Context) {
@@ -164,8 +108,8 @@ func FindUserByNameAndPwd(c *gin.Context) {
 	user := models.FindUserByName(name)
 	if user.Name == "" {
 		c.JSON(200, gin.H{
-			"code":    -1, //  0 success    -1 fail
-			"message": "This User Does Not Exist",
+			"code":    -1, //  0 success -1 fail
+			"message": "The User Does not Exist",
 			"data":    data,
 		})
 		return
@@ -174,7 +118,7 @@ func FindUserByNameAndPwd(c *gin.Context) {
 	flag := utils.ValidPassword(password, user.Salt, user.PassWord)
 	if !flag {
 		c.JSON(200, gin.H{
-			"code":    -1, //  0 success    -1 fail
+			"code":    -1, //  0 success -1 fail
 			"message": "Wrong PassWord",
 			"data":    data,
 		})
@@ -184,14 +128,71 @@ func FindUserByNameAndPwd(c *gin.Context) {
 	data = models.FindUserByNameAndPwd(name, pwd)
 
 	c.JSON(200, gin.H{
-		"code":    0, //  0 success    -1 fail
-		"message": "Login Successfully",
+		"code":    0, //  0 success -1 fail
+		"message": "Successfully Login!",
 		"data":    data,
 	})
 }
 
-// Prevent Cross-Origin Site Forgery Requests
-// to be updated
+// DeleteUser
+// @Summary delete user
+// @Tags user module
+// @param id query string false "id"
+// @Success 200 {string} json{"code","message"}
+// @Router /user/deleteUser [get]
+func DeleteUser(c *gin.Context) {
+	user := models.UserBasic{}
+	id, _ := strconv.Atoi(c.Query("id"))
+	user.ID = uint(id)
+	models.DeleteUser(user)
+	c.JSON(200, gin.H{
+		"code":    0, //  0 success -1 fail
+		"message": "Delete User Successfully!",
+		"data":    user,
+	})
+
+}
+
+// UpdateUser
+// @Summary update user
+// @Tags usermodule
+// @param id formData string false "id"
+// @param name formData string false "name"
+// @param password formData string false "password"
+// @param phone formData string false "phone"
+// @param email formData string false "email"
+// @Success 200 {string} json{"code","message"}
+// @Router /user/updateUser [post]
+func UpdateUser(c *gin.Context) {
+	user := models.UserBasic{}
+	id, _ := strconv.Atoi(c.PostForm("id"))
+	user.ID = uint(id)
+	user.Name = c.PostForm("name")
+	user.PassWord = c.PostForm("password")
+	user.Phone = c.PostForm("phone")
+	user.Avatar = c.PostForm("icon")
+	user.Email = c.PostForm("email")
+	fmt.Println("update :", user)
+
+	_, err := govalidator.ValidateStruct(user)
+	if err != nil {
+		fmt.Println(err)
+		c.JSON(200, gin.H{
+			"code":    -1, //  0 success -1 fail
+			"message": "Update Para not consistent",
+			"data":    user,
+		})
+	} else {
+		models.UpdateUser(user)
+		c.JSON(200, gin.H{
+			"code":    0, //  0 success -1 fail
+			"message": "Update User Successfully",
+			"data":    user,
+		})
+	}
+
+}
+
 var upGrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool {
 		return true
@@ -213,17 +214,28 @@ func SendMsg(c *gin.Context) {
 	MsgHandler(c, ws)
 }
 
+func RedisMsg(c *gin.Context) {
+	userIdA, _ := strconv.Atoi(c.PostForm("userIdA"))
+	userIdB, _ := strconv.Atoi(c.PostForm("userIdB"))
+	start, _ := strconv.Atoi(c.PostForm("start"))
+	end, _ := strconv.Atoi(c.PostForm("end"))
+	isRev, _ := strconv.ParseBool(c.PostForm("isRev"))
+	res := models.RedisMsg(int64(userIdA), int64(userIdB), int64(start), int64(end), isRev)
+	utils.RespOKList(c.Writer, "ok", res)
+}
+
 func MsgHandler(c *gin.Context, ws *websocket.Conn) {
 	for {
 		msg, err := utils.Subscribe(c, utils.PublishKey)
 		if err != nil {
 			fmt.Println(" MsgHandler Sending Failed", err)
 		}
+
 		tm := time.Now().Format("2006-01-02 15:04:05")
 		m := fmt.Sprintf("[ws][%s]:%s", tm, msg)
 		err = ws.WriteMessage(1, []byte(m))
 		if err != nil {
-			fmt.Println(err)
+			log.Fatalln(err)
 		}
 	}
 }
@@ -231,10 +243,14 @@ func MsgHandler(c *gin.Context, ws *websocket.Conn) {
 func SendUserMsg(c *gin.Context) {
 	models.Chat(c.Writer, c.Request)
 }
-
 func SearchFriends(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Request.FormValue("userId"))
 	users := models.SearchFriend(uint(id))
+	// c.JSON(200, gin.H{
+	// 	"code":    0, //  0 success -1 fail
+	// 	"message": "Search User List Successfully!",
+	// 	"data":    users,
+	// })
 	utils.RespOKList(c.Writer, users, len(users))
 }
 
@@ -250,7 +266,7 @@ func AddFriend(c *gin.Context) {
 	}
 }
 
-// //新建群
+// // new group
 // func CreateCommunity(c *gin.Context) {
 // 	ownerId, _ := strconv.Atoi(c.Request.FormValue("ownerId"))
 // 	name := c.Request.FormValue("name")
@@ -269,7 +285,7 @@ func AddFriend(c *gin.Context) {
 // 	}
 // }
 
-// //加载群列表
+// // load group
 // func LoadCommunity(c *gin.Context) {
 // 	ownerId, _ := strconv.Atoi(c.Request.FormValue("ownerId"))
 // 	//	name := c.Request.FormValue("name")
@@ -281,7 +297,7 @@ func AddFriend(c *gin.Context) {
 // 	}
 // }
 
-// //加入群 userId uint, comId uint
+// // join group userId uint, comId uint
 // func JoinGroups(c *gin.Context) {
 // 	userId, _ := strconv.Atoi(c.Request.FormValue("userId"))
 // 	comId := c.Request.FormValue("comId")
@@ -295,10 +311,10 @@ func AddFriend(c *gin.Context) {
 // 	}
 // }
 
-// func FindByID(c *gin.Context) {
-// 	userId, _ := strconv.Atoi(c.Request.FormValue("userId"))
+func FindByID(c *gin.Context) {
+	userId, _ := strconv.Atoi(c.Request.FormValue("userId"))
 
-// 	//	name := c.Request.FormValue("name")
-// 	data := models.FindByID(uint(userId))
-// 	utils.RespOK(c.Writer, data, "ok")
-// }
+	//	name := c.Request.FormValue("name")
+	data := models.FindByID(uint(userId))
+	utils.RespOK(c.Writer, data, "ok")
+}

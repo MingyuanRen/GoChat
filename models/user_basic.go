@@ -75,3 +75,9 @@ func GetUserList() []*UserBasic {
 	}
 	return data
 }
+
+func FindByID(id uint) UserBasic {
+	user := UserBasic{}
+	utils.DB.Where("id = ?", id).First(&user)
+	return user
+}
