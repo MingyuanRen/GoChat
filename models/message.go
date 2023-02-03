@@ -278,3 +278,24 @@ func RedisMsg(userIdA int64, userIdB int64, start int64, end int64, isRev bool) 
 	}**/
 	return rels
 }
+
+func JoinGroup(userId uint, comId string) (int, string) {
+	contact := Contact{}
+	contact.OwnerId = userId
+	//contact.TargetId = comId
+	contact.Type = 2
+	community := Community{}
+
+	utils.DB.Where("id=? or name=?", comId, comId).Find(&community)
+	if community.Name == "" {
+		return -1, "Group Not Found"
+	}
+	utils.DB.Where("owner_id=? and target_id=? and type =2 ", userId, comId).Find(&contact)
+	if !contact.CreatedAt.IsZero() {
+		return -1, "You have joined this Group"
+	} else {
+		contact.TargetId = community.ID
+		utils.DB.Create(&contact)
+		return 0, "加群成功"
+	}
+}
