@@ -19,7 +19,7 @@ func GetIndex(c *gin.Context) {
 	}
 	ind.Execute(c.Writer, "index")
 	// c.JSON(200, gin.H{
-	// 	"message": "welcome to GoChat!",
+	// 	"message": "welcome !!  ",
 	// })
 }
 
@@ -58,4 +58,8 @@ func ToChat(c *gin.Context) {
 	// c.JSON(200, gin.H{
 	// 	"message": "welcome !!  ",
 	// })
+}
+
+func Chat(c *gin.Context) {
+	models.Chat(c.Writer, c.Request)
 }
