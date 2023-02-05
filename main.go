@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gochat/router" //  router "ginchat/router"
+	"gochat/router" //  router "gochat/router"
 	"gochat/utils"
 )
 
