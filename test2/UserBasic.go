@@ -21,7 +21,7 @@ type UserBasic struct {
 	Salt          string
 	LoginTime     time.Time
 	HeartbeatTime time.Time
-	LoginOutTime  time.Time `gorm:"column:login_out_time" json:"login_out_time"`
+	LoginOutTime  time.Time
 	IsLogout      bool
 	DeviceInfo    string
 }
