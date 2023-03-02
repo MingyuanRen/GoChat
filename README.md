@@ -59,7 +59,7 @@ Start the application
 <img src="asset/demo/ChatPage.jpg" width="400" height="500" alt="ContactPage"/>
 <img src="asset/demo/Chatting.jpg" width="600" height="400" alt="ChatPage"/>
 
-<img src="asset/demo/extras.jpg" width="200" height="100" alt="Extra chatting functions"/>
+<img src="asset/demo/extras.jpg" width="400" height="100" alt="Extra chatting functions"/>
 <img src="asset/demo/functions.jpg" width="400" height="100" alt="Extra chatting functions"/>
 <img src="asset/demo/creategroup.png" width="600" height="300" alt="CreateGroup"/>
 
