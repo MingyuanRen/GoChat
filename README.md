@@ -55,13 +55,13 @@ Start the application
 <img src="asset/demo/register.jpg" width="400" height="300" alt="Register"/>
 <img src="asset/demo/login.jpg" width="400" height="300" alt="Login"/>
 <img src="asset/demo/Personals.jpg" width="400" height="500" alt="Personals"/>
-<img src="asset/demo/AddFriend.jpg" width="400" height="500" alt="AddFriend"/>
+<img src="asset/demo/AddFriend.jpg" width="600" height="400" alt="AddFriend"/>
 <img src="asset/demo/ChatPage.jpg" width="400" height="500" alt="ContactPage"/>
-<img src="asset/demo/Chatting.jpg" width="400" height="500" alt="ChatPage"/>
+<img src="asset/demo/Chatting.jpg" width="600" height="400" alt="ChatPage"/>
 
-<img src="asset/demo/extras.jpg" width="400" height="500" alt="Extra chatting functions"/>
-<img src="asset/demo/functions.jpg" width="400" height="500" alt="Extra chatting functions"/>
-<img src="asset/demo/creategroup.png" width="400" height="500" alt="CreateGroup"/>
+<img src="asset/demo/extras.jpg" width="200" height="100" alt="Extra chatting functions"/>
+<img src="asset/demo/functions.jpg" width="300" height="200" alt="Extra chatting functions"/>
+<img src="asset/demo/creategroup.png" width="600" height="400" alt="CreateGroup"/>
 
 
 
