@@ -6,7 +6,7 @@ Instant messaging system (chat, groups, friends, vote, all activities!) written 
 
 Go, Gin, WebSocket, MySQL, Redis, Vue.js
 
-![Logo](https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/10148800/244973_960616.png)
+![Logo](https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1500,f_auto,q_auto/10148800/244973_960616.png)
 
 
 ## Features
@@ -52,16 +52,16 @@ Start the application
   go run main.go
 ```
 ## Demo
-<img src="asset/demo/register.jpg" width="400" height="200" alt="Register"/>
-<img src="asset/demo/login.jpg" width="400" height="200" alt="Login"/>
-<img src="asset/demo/Personals.jpg" width="400" height="200" alt="Personals"/>
-<img src="asset/demo/AddFriend.jpg" width="400" height="200" alt="AddFriend"/>
-<img src="asset/demo/ChatPage.jpg" width="400" height="200" alt="ContactPage"/>
-<img src="asset/demo/Chatting.jpg" width="400" height="200" alt="ChatPage"/>
+<img src="asset/demo/register.jpg" width="400" height="300" alt="Register"/>
+<img src="asset/demo/login.jpg" width="400" height="300" alt="Login"/>
+<img src="asset/demo/Personals.jpg" width="400" height="500" alt="Personals"/>
+<img src="asset/demo/AddFriend.jpg" width="400" height="500" alt="AddFriend"/>
+<img src="asset/demo/ChatPage.jpg" width="400" height="500" alt="ContactPage"/>
+<img src="asset/demo/Chatting.jpg" width="400" height="500" alt="ChatPage"/>
 
-<img src="asset/demo/extras.jpg" width="400" height="200" alt="Extra chatting functions"/>
-<img src="asset/demo/functions.jpg" width="400" height="200" alt="Extra chatting functions"/>
-<img src="asset/demo/creategroup.png" width="400" height="200" alt="CreateGroup"/>
+<img src="asset/demo/extras.jpg" width="400" height="500" alt="Extra chatting functions"/>
+<img src="asset/demo/functions.jpg" width="400" height="500" alt="Extra chatting functions"/>
+<img src="asset/demo/creategroup.png" width="400" height="500" alt="CreateGroup"/>
 
 
 
