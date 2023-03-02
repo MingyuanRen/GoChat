@@ -52,8 +52,17 @@ Start the application
   go run main.go
 ```
 ## Demo
+<img src="asset/demo/register.jpg" width="150" height="200" alt="Register"/>
+<img src="asset/demo/login.jpg" width="150" height="200" alt="Login"/>
+<img src="asset/demo/Personals.jpg" width="150" height="200" alt="Personals"/>
+<img src="asset/demo/AddFriend.jpg" width="150" height="200" alt="AddFriend"/>
+<img src="asset/demo/ChatPage.jpg" width="150" height="200" alt="ContactPage"/>
+<img src="asset/demo/Chatting.jpg" width="150" height="200" alt="ChatPage"/>
 
-Insert gif or link to demo
+<img src="asset/demo/extras.jpg" width="150" height="200" alt="Extra chatting functions"/>
+<img src="asset/demo/functions.jpg" width="150" height="200" alt="Extra chatting functions"/>
+<img src="asset/demo/creategroup.jpg" width="150" height="200" alt="CreateGroup"/>
 
 
-![addFriend](asset/demo/AddFriend.jpg)
+
+
