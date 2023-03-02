@@ -60,9 +60,17 @@ Start the application
 <img src="asset/demo/Chatting.jpg" width="600" height="400" alt="ChatPage"/>
 
 <img src="asset/demo/extras.jpg" width="700" height="100" alt="Extra chatting functions"/>
-<img src="asset/demo/functions.jpg" width="400" height="100" alt="Extra chatting functions"/>
+<img src="asset/demo/functions.jpg" width="500" height="100" alt="Extra chatting functions"/>
 <img src="asset/demo/creategroup.png" width="600" height="300" alt="CreateGroup"/>
 
+## Usage
+Navigate to http://localhost:8080 in your web browser.
 
+Sign up for an account or log in if you already have one.
 
+Create a new chat room or join an existing one.
 
+Start chatting with other users in real-time.
+
+## ToDo
+Connecting Open AI ChatGPT supporting chatbot
