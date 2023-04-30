@@ -72,5 +72,5 @@ Create a new chat room or join an existing one.
 
 Start chatting with other users in real-time.
 
-## ToDo
-Connecting Open AI ChatGPT supporting chatbot
+## Update
+Connected Open AI ChatGPT supporting chatbot Now!!
