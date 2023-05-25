@@ -8,11 +8,13 @@ import (
 	"net"
 	"net/http"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/go-redis/redis/v8"
 	"github.com/gorilla/websocket"
+	"github.com/machinebox/sdk-go/textbox"
 	"gopkg.in/fatih/set.v0"
 	"gorm.io/gorm"
 )
@@ -100,6 +102,24 @@ func Chat(writer http.ResponseWriter, request *http.Request) {
 	sendMsg(userId, []byte("Welcome to GoChat!!!!!"))
 }
 
+func gpt3Chat(prompt string) (string, error) {
+	tb := textbox.New("http://localhost:8080")
+
+	analysis, err := tb.Check(strings.NewReader(prompt))
+	if err != nil {
+		return "", err
+	}
+
+	// Here you can manipulate the response as you want
+	// In this example, I just concatenate all the sentences
+	response := ""
+	for _, sentence := range analysis.Sentences {
+		response += sentence.Text
+	}
+
+	return response, nil
+}
+
 func sendProc(node *Node) {
 	for {
 		select {
@@ -125,6 +145,57 @@ func recvProc(node *Node) {
 		fmt.Println("[ws]recvProc <<<<< msg :", string(data))
 	}
 }
+
+// func recvProc_GPT(node *Node) {
+// 	for {
+// 		_, data, err := node.Conn.ReadMessage()
+// 		if err != nil {
+// 			fmt.Println(err)
+// 			return
+// 		}
+
+// 		// decode the data into a Message
+// 		msg := Message{}
+// 		err = json.Unmarshal(data, &msg)
+// 		if err != nil {
+// 			fmt.Println(err)
+// 			return
+// 		}
+
+// 		// if the message is a chat message
+// 		if msg.Type == 1 {
+// 			// send to GPT-3
+// 			response, err := gpt3Chat(msg.Content) // gpt3Chat() needs to be defined
+// 			if err != nil {
+// 				fmt.Println(err)
+// 				return
+// 			}
+
+// 			// create a new message
+// 			responseMsg := Message{
+// 				UserId:     botUserId,  // bot's ID
+// 				TargetId:   msg.UserId, // reply to the sender
+// 				Type:       1,          // chat message
+// 				Media:      1,          // text message
+// 				Content:    response,
+// 				CreateTime: uint64(time.Now().Unix()),
+// 			}
+
+// 			responseMsgJson, err := json.Marshal(responseMsg)
+// 			if err != nil {
+// 				fmt.Println(err)
+// 				return
+// 			}
+
+// 			// broadcast the response message
+// 			broadMsg(responseMsgJson)
+// 		} else {
+// 			broadMsg(data)
+// 		}
+
+// 		fmt.Println("[ws]recvProc <<<<< msg :", string(data))
+// 	}
+// }
 
 var udpsendChan chan []byte = make(chan []byte, 1024)
 
