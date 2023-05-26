@@ -367,6 +367,6 @@ func JoinGroup(userId uint, comId string) (int, string) {
 	} else {
 		contact.TargetId = community.ID
 		utils.DB.Create(&contact)
-		return 0, "加群成功"
+		return 0, "Add Group Successfully!!"
 	}
 }

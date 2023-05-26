@@ -505,31 +505,49 @@
                 addfriend: function () {
                     //console.log("addfriend....")
                     var that = this;
-                    mui.prompt('', '请输入好友名称', '加好友', ['取消', '确认'], function (e) {
+                    mui.prompt('', 'Input Friend Name', 'Add Friend', ['Cancel', 'Confirm'], function (e) {
                         if (e.index == 1) {
-                            //判断数字
+                            // Number
                             //if (isNaN(e.value) || e.value <= 0) {
-                            //    mui.toast('格式错误');
+                            //    mui.toast('Incorrect Format');
                             //} else {
                             //mui.toast(e.value);
                             that._addfriend(e.value)
                             //}
                         } else {
-                            //mui.toast('您取消了入库');
+                            //mui.toast('You cancelled!');
+                        }
+                    }, 'div');
+                    document.querySelector('.mui-popup-input input').type = 'text';
+
+                },
+                deletefriend: function () {
+                    //console.log("addfriend....")
+                    var that = this;
+                    mui.prompt('', 'Input Friend Name', 'Add Friend', ['Cancel', 'Confirm'], function (e) {
+                        if (e.index == 1) {
+                            // Number
+                            //if (isNaN(e.value) || e.value <= 0) {
+                            //    mui.toast('Incorrect Format');
+                            //} else {
+                            //mui.toast(e.value);
+                            that._addfriend(e.value)
+                            //}
+                        } else {
+                            //mui.toast('You cancelled!');
                         }
                     }, 'div');
                     document.querySelector('.mui-popup-input input').type = 'text';
 
                 },
                 _addfriend: function (dstobj) {
-                    //防止一次点击 穿透访问多次
                     if (this.isDisable) {
                         this.setTimeFlag()
                         //console.log("_addfriend....")
                         var that = this
                         post("contact/addfriend", { targetName: dstobj, userId: userId() }, function (res) {
                             if (res.Code == 0) {
-                                mui.toast("添加成功");
+                                mui.toast("Added Successfully");
                                 that.loadfriends();
                             } else {
                                 mui.toast(res.Msg);
@@ -537,18 +555,15 @@
                         })
                     }
                 },
-                //个人资料修改显示
                 setUserInfo: function () {
                     this.win = "userinfo"
                     //  console.log("createCom")
                 },
-                //新建群显示
                 createCom: function () {
                     this.win = "community"
                     //  console.log("createCom")
                 },
 
-                //新建群提交
                 createcommunity() {
                     //console.log("createcommunity")
                     this.com.ownerId = userId()
@@ -560,7 +575,7 @@
                         } else {
                             //location.replace("localhost:8081")
                             //location.href = "/"
-                            mui.toast("建群成功")
+                            mui.toast("Group Created!!")
                             this.loadcommunitys();
                             //goBack()
                         }
@@ -580,7 +595,7 @@
                         } else {
                             //location.replace("localhost:8081")
                             //location.href = "/"
-                            mui.toast("修改成功")
+                            mui.toast("Change Successfully!")
                             //goBack()
                         }
                     })
@@ -588,7 +603,7 @@
 
 
 
-                //回到聊天首页
+                // back to chat
                 goBack() {
                     this.win = "main"
                 },
@@ -600,7 +615,7 @@
                         console.log(that);
                         post("contact/joinGroup", { comId: dstobj, "userId": userId() }, function (res) {
                             if (res.Code == 0) {
-                                mui.toast("添加成功");
+                                mui.toast("Added Successfully!!");
 
                                 that.loadcommunitys();
                             } else {
@@ -611,16 +626,16 @@
                 },
                 joincom: function () {
                     var that = this;
-                    mui.prompt('', '请输入群号或者群名称', '加群', ['取消', '确认'], function (e) {
+                    mui.prompt('', 'Please Input Group Number or Group Name', 'Add Group', ['Cancel', 'Confirm'], function (e) {
                         if (e.index == 1) {
                             //    if (isNaN(e.value) || e.value <= 0) {
-                            //       mui.toast('格式错误');
+                            //       mui.toast('Incorrect Format!');
                             //   } else {
                             //mui.toast(e.value);
                             that._joincomunity(e.value)
                             // }
                         } else {
-                            //mui.toast('您取消了入库');
+                            //mui.toast('You cancelled!');
                         }
                     }, 'div');
                     document.querySelector('.mui-popup-input input').type = 'text';
@@ -637,11 +652,11 @@
                     }, 100)
                 },
                 heartbeat() {
-                    if (this.webSocket.readyState == 1) {  //失去连接 3
+                    if (this.webSocket.readyState == 1) { 
                         var msg = this.createmsgcontext();
                         msg.Media = -1;
                         msg.Type = 3
-                        msg.Content = "心跳";
+                        msg.Content = "HeartBeat";
                         //this.showmsg(userInfo(),msg);
                         this.webSocket.send(JSON.stringify(msg))
                     }
