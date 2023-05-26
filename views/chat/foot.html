@@ -521,25 +521,6 @@
                     document.querySelector('.mui-popup-input input').type = 'text';
 
                 },
-                deletefriend: function () {
-                    //console.log("addfriend....")
-                    var that = this;
-                    mui.prompt('', 'Input Friend Name', 'Add Friend', ['Cancel', 'Confirm'], function (e) {
-                        if (e.index == 1) {
-                            // Number
-                            //if (isNaN(e.value) || e.value <= 0) {
-                            //    mui.toast('Incorrect Format');
-                            //} else {
-                            //mui.toast(e.value);
-                            that._addfriend(e.value)
-                            //}
-                        } else {
-                            //mui.toast('You cancelled!');
-                        }
-                    }, 'div');
-                    document.querySelector('.mui-popup-input input').type = 'text';
-
-                },
                 _addfriend: function (dstobj) {
                     if (this.isDisable) {
                         this.setTimeFlag()
