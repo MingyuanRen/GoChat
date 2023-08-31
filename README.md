@@ -4,7 +4,7 @@ A Chating System built with Golang
 
 Instant messaging system (chat, groups, friends, vote, all activities!) written with Go Programming Language
 
-Go, Gin, WebSocket, MySQL, Redis, Vue.js
+Golang, Gin, MySQL, WebSocket, Redis, Docker, Kubernetes, AWS, Vue.js
 
 ![Logo](https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1500,f_auto,q_auto/10148800/244973_960616.png)
 
@@ -19,6 +19,7 @@ Address-sharing: Share your location with other users in real-time.
 
 Real-time chat: Messages are delivered instantly using WebSocket.
 
+AI ChatBot: AI chatbot thourgh ChatGPT API V3.5
 
 ## Technologies Used
 Golang: programming language used to develop the backend of the application.
@@ -28,6 +29,8 @@ Gin: web framework for Golang used to build the RESTful API of the application.
 WebSocket: Protocol used to enable real-time communication between the client and server.
 
 Redis, MySQL: Database used to store user information and messages.
+
+Docker, Kubernetes, AWS: Tools used for deployment.
 
 Vue.js: A JavaScript framework used to develop the frontend of the application.
 
