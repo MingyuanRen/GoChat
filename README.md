@@ -1,8 +1,7 @@
 # GoChat
 
-A Chating System built with Golang
-
-Instant messaging system (chat, groups, friends, vote, all activities!) written with Go Programming Language
+A scalable, real-time chat app with multimedia and AI chatbot features using Golang,
+Gin, WebSocket and Redis, containerized with Docker and orchestrated via Kubernetes on AWS EKS.
 
 Golang, Gin, MySQL, WebSocket, Redis, Docker, Kubernetes, AWS, Vue.js
 
@@ -75,5 +74,3 @@ Create a new chat room or join an existing one.
 
 Start chatting with other users in real-time.
 
-## Update
-Connected Open AI ChatGPT supporting chatbot Now!!
